@@ -47,4 +47,4 @@ class userData {
 
 let Halid = new userData("Halid", "1234", "Student");
 
-console.log(Halid.username);
+console.log(Halid.email);

@@ -23,7 +23,6 @@
     <!-- Custom styles for this template-->
 
     <link href="./style.css" rel="stylesheet" />
-
   </head>
 
   <body class="bg-gradient-primary">
@@ -39,14 +38,14 @@
                 <div class="col-lg-6">
                   <div class="p-5">
                     <div class="text-center">
-                      <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                      <h1 class="h4 text-gray-900 mb-4">Willkommen zurück!</h1>
                     </div>
-                    <form class="user">
+                    <form class="user" id="welcomeFormular">
                       <div class="form-group">
                         <input
                           type="email"
                           class="form-control form-control-user"
-                          id="exampleInputEmail"
+                          id="inputEmail"
                           aria-describedby="emailHelp"
                           placeholder="Enter Email Address..." />
                       </div>
@@ -54,7 +53,7 @@
                         <input
                           type="password"
                           class="form-control form-control-user"
-                          id="exampleInputPassword"
+                          id="inputPassword"
                           placeholder="Password" />
                       </div>
                       <div class="form-group">
@@ -115,5 +114,26 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Eigner JavaScript -->
+    <script>
+      // Funktion, die aufgerufen wird, wenn das Formular abgeschickt wird
+      function formularAbsenden(event) {
+        event.preventDefault(); // Verhindert das Standardverhalten des Absendens
+
+        // Den Inhalt der Eingabefelder Email und Password über die IDs abrufen
+        let eingabeInhalt = document.getElementById("inputEmail").value;
+        let eingabeInhalt = document.getElementById("inputPassword").value;
+
+        // Hier kannst du den eingegebenen Inhalt weiterverarbeiten, z. B. an das Backend senden
+        console.log("Eingegebener Inhalt: " + eingabeInhalt);
+      }
+
+      // Das Formular-Element über die ID abrufen
+      let form = document.getElementById("welcomeFormular");
+
+      // Die Funktion formularAbsenden aufrufen, wenn das Formular abgeschickt wird
+      form.addEventListener("submit", formularAbsenden);
+    </script>
   </body>
 </html>
