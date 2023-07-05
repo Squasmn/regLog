@@ -49,5 +49,5 @@ let Halid = new userData("Halid", "1234", "Student");
 
 console.log(Halid.username);
 
+document.getElementById("InputEmail").placeholder="Schreib dein Email"
 
-console.log(document.getElementById("InputEmail"))
