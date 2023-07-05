@@ -1,2 +1,14 @@
 # registerLogin
 Group Project registration and login functionality
+
+Erstellen einer login und registrier Webpage
+
+Arbeitsteilung:
+
+Team Member 1: Backend Development Set up the project structure: Create the directory structure for the project and initialize a new Node.js project using npm. Design the data structure: Define the structure of the user data, including username, password, and additional profile information, using JavaScript objects and arrays. Implement user registration functionality:Create a function to capture user input (username and password). Validate the input for requirements like username uniqueness, password complexity, etc. Store the user details securely in an in-memory data structure. Implement user login functionality:Create a function to capture user login input (username and password). Verify the entered credentials against the stored user data. Grant access if the credentials match. Handle error cases:Implement proper error handling for scenarios like invalid inputs, duplicate usernames during registration, incorrect login credentials, etc. Test the backend functionality:Write unit tests to verify the registration and login functionalities. Test different scenarios and edge cases to ensure the proper functioning of the backend code.
+
+Team Member 2: User Profile Management Implement user profile retrieval:Create a function to fetch and display the user's profile information from the in-memory data structure. Implement user profile update functionality:Create a function to capture user input for updating profile information (e.g., username, password, or any additional details). Validate the input and apply the changes to the user's profile in the in-memory data structure. Test user profile management:Write test cases to verify the profile retrieval and update functionalities. Test scenarios like updating the username, password, and additional details.
+
+Team Member 3: Integration and Testing Integrate backend functionality with user input and terminal interface:Create functions to handle user input from the terminal and call the respective backend functions for registration, login, profile retrieval, and update. Implement a terminal user interface:Design a user-friendly terminal interface to guide users through the registration, login, and profile management process. Test the overall system:Write integration tests to ensure the seamless flow of registration, login, and profile management. Test different user scenarios and edge cases to validate the entire system. Error handling and edge case testing:Identify potential error scenarios and edge cases in the application flow and write test cases to handle them. Test for scenarios like invalid user inputs, concurrent user sessions, etc.
+
+Remember, in this approach, the user data will not persist beyond the duration of the program execution. If you restart the program, the user data will be reset.
