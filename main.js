@@ -59,9 +59,31 @@ function formularAbsenden(event) {
   let eingabeEmail = document.getElementById("InputEmail").value;
   let eingabePassword = document.getElementById("InputPassword").value;
 
+  // Eingabevalidierung
+  if (!eingabeEmail || eingabeEmail.trim() === "") {
+    alert("Bitte geben Sie eine Email-Adresse ein.");
+    return;
+  }
+
+  if (!validateEmail(eingabeEmail)) {
+    alert("Bitte geben Sie eine gültige Email-Adresse ein.");
+    return;
+  }
+
+  if (
+    !eingabePassword ||
+    eingabePassword.trim() === "" ||
+    eingabePassword.length < 8
+  ) {
+    alert(
+      "Bitte geben Sie ein Passwort ein. Das Passwort muss mindestens 8 Zeichen lang sein."
+    );
+    return;
+  }
+
   // Hier kannst du den eingegebenen Inhalt weiterverarbeiten, z. B. an das Backend senden
-  console.log("Eingegebener Email: " + eingabeEmail);
-  console.log("Eingegebener Passwort: " + eingabePassword);
+  console.log("Eingegebene Email: " + eingabeEmail);
+  console.log("Eingegebenes Passwort: " + eingabePassword);
 }
 
 // Das Formular-Element über die ID abrufen
@@ -69,3 +91,9 @@ let form = document.getElementById("welcomeFormular");
 
 // Die Funktion formularAbsenden aufrufen, wenn das Formular abgeschickt wird
 form.addEventListener("submit", formularAbsenden);
+
+// Funktion zur Überprüfung der Email-Adresse mit einem einfachen regulären Ausdruck
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
