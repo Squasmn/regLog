@@ -2,10 +2,6 @@
 export {};
 import fs from "fs";
 
-// Group Project registration and login functionality
-
-// Erstellen einer login und registrier Webpage
-
 class UserData {
   constructor(username, password, email) {
     this.username = username;
@@ -55,16 +51,14 @@ function addUser(userData) {
   console.log("User added successfully.");
 }
 
-// Frontend functionality
-
 function formularAbsenden(event) {
-  event.preventDefault(); // Verhindert das Standardverhalten des Absendens
+  event.preventDefault(); // Prevents the default form submission behavior
 
-  // Den Inhalt der Eingabefelder Email und Password über die IDs abrufen
+  // Get the values of email and password input fields
   let eingabeEmail = document.getElementById("InputEmail").value;
   let eingabePassword = document.getElementById("InputPassword").value;
 
-  // Eingabevalidierung
+  // Input validation
   if (!eingabeEmail || eingabeEmail.trim() === "") {
     alert("Bitte geben Sie eine Email-Adresse ein.");
     return;
@@ -85,15 +79,19 @@ function formularAbsenden(event) {
     );
     return;
   }
+
+  // Create a new instance of UserData with the entered data
+  const newUser = new UserData("", eingabePassword, eingabeEmail);
+
+  // Add the new user to the system
+  addUser(newUser);
+
+  // Reset the form
+  event.target.reset();
+
+  // Display a success message or perform any other desired actions
+  console.log("New user created:", newUser);
 }
-// Add the new user to the system
-addUser(newUser);
-
-// Reset the form
-document.getElementById("welcomeFormular").reset();
-
-// Display a success message or perform any other desired actions
-console.log("New user created:", newUser);
 
 // Das Formular-Element über die ID abrufen
 let form = document.getElementById("welcomeFormular");
