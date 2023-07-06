@@ -106,6 +106,8 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
+    <script type="module" src="/main.js"></script>
+
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -122,8 +124,8 @@
         event.preventDefault(); // Verhindert das Standardverhalten des Absendens
 
         // Den Inhalt der Eingabefelder Email und Password über die IDs abrufen
-        let eingabeInhalt = document.getElementById("inputEmail").value;
-        let eingabeInhalt = document.getElementById("inputPassword").value;
+        let eingabeEmail = document.getElementById("inputEmail").value;
+        let eingabe = document.getElementById("inputPassword").value;
 
         // Hier kannst du den eingegebenen Inhalt weiterverarbeiten, z. B. an das Backend senden
         console.log("Eingegebener Inhalt: " + eingabeInhalt);
