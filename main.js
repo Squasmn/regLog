@@ -6,10 +6,6 @@ import fs from "fs";
 
 // Erstellen einer login und registrier Webpage
 
-// 3. Implement user registration functionality:
-//    - Create a function that takes user registration data as input and performs the necessary validations.
-//    - Check for requirements like username uniqueness, password complexity, etc.
-//    - If the registration data is valid, store the user details securely in a separate JSON file using the Node.js File System (fs) module.
 // 4. Implement user login functionality:
 //    - Create a function that takes user login credentials as input and verifies them against the stored user data in the JSON file.
 //    - If the login credentials are valid, generate a session token or identifier and return it as a response.
@@ -75,3 +71,6 @@ addUser(newUser);
 
 const newUser2 = new UserData("Bob", "password123", "bob@example.com");
 addUser(newUser2);
+
+const newUser3 = new UserData("Charlie", "password456", "bob@example.com");
+addUser(newUser3);
