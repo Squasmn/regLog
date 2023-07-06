@@ -1,5 +1,7 @@
 // ESM syntax is supported.
 export {};
+import fs from "fs";
+import { formularAbsenden } from "./functions.js";
 
 // Group Project registration and login functionality
 
@@ -35,65 +37,48 @@ class userData {
     this.password = password;
     this.email = email;
   }
-
-  // Implement user registration functionality:
-
-  // Create server-side routes to handle user registration requests.
-
-  // Validate the input for requirements like username uniqueness, password complexity, etc.
-
-  // Store the user details securely in a JSON file
 }
 
-/*let Halid = new userData("Halid", "1234", "Student");
+function storeUserData(userData) {
+  // Read the existing data from the JSON file (if any)
+  let existingData = [];
+  try {
+    const jsonData = fs.readFileSync("userdata.json", "utf-8");
+    existingData = JSON.parse(jsonData);
+  } catch (error) {
+    // Handle the case where the file doesn't exist yet or cannot be read
+    console.error("Error reading userdata.json:", error);
+  }
 
-console.log(Halid.username);
-
-document.getElementById("InputEmail").placeholder="Schreib dein Email"
-*/
-
-function formularAbsenden(event) {
-  event.preventDefault(); // Verhindert das Standardverhalten des Absendens
-
-  // Den Inhalt der Eingabefelder Email und Password über die IDs abrufen
-  let eingabeEmail = document.getElementById("InputEmail").value;
-  let eingabePassword = document.getElementById("InputPassword").value;
-
-  // Eingabevalidierung
-  if (!eingabeEmail || eingabeEmail.trim() === "") {
-    alert("Bitte geben Sie eine Email-Adresse ein.");
+  // Check for duplicate registrations
+  const isDuplicate = existingData.some(
+    (user) =>
+      user.username === userData.username || user.email === userData.email
+  );
+  if (isDuplicate) {
+    console.error("User with the same username or email already exists.");
     return;
   }
 
-  if (!validateEmail(eingabeEmail)) {
-    alert("Bitte geben Sie eine gültige Email-Adresse ein.");
-    return;
-  }
+  // Add the new user data to the existing data
+  existingData.push(userData);
 
-  if (
-    !eingabePassword ||
-    eingabePassword.trim() === "" ||
-    eingabePassword.length < 8
-  ) {
-    alert(
-      "Bitte geben Sie ein Passwort ein. Das Passwort muss mindestens 8 Zeichen lang sein."
-    );
-    return;
-  }
+  // Convert the updated data to JSON string
+  const updatedData = JSON.stringify(existingData, null, 2);
 
-  // Hier kannst du den eingegebenen Inhalt weiterverarbeiten, z. B. an das Backend senden
-  console.log("Eingegebene Email: " + eingabeEmail);
-  console.log("Eingegebenes Passwort: " + eingabePassword);
+  // Write the updated data back to the JSON file
+  fs.writeFile("userdata.json", updatedData, "utf-8", (error) => {
+    if (error) {
+      // Handle the case where the file cannot be written
+      console.error("Error writing userdata.json:", error);
+    } else {
+      console.log("User data stored successfully.");
+    }
+  });
 }
+const user1 = new userData("John", "password123", "john@example.com");
+const user2 = new userData("Jane", "password456", "jane@example.com");
+// Add more instances as needed
 
-// Das Formular-Element über die ID abrufen
-let form = document.getElementById("welcomeFormular");
-
-// Die Funktion formularAbsenden aufrufen, wenn das Formular abgeschickt wird
-form.addEventListener("submit", formularAbsenden);
-
-// Funktion zur Überprüfung der Email-Adresse mit einem einfachen regulären Ausdruck
-function validateEmail(email) {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-}
+storeUserData(user1, user2);
+// Call the function for additional instances
