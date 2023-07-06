@@ -6,17 +6,6 @@ import fs from "fs";
 
 // Erstellen einer login und registrier Webpage
 
-// 4. Implement user login functionality:
-//    - Create a function that takes user login credentials as input and verifies them against the stored user data in the JSON file.
-//    - If the login credentials are valid, generate a session token or identifier and return it as a response.
-// 5. Implement user profile management functionality:
-//    - Create functions to handle profile retrieval and update requests.
-//    - Read and update the user's profile information in the separate JSON file using the Node.js File System (fs) module.
-
-// To implement these adjustments, you can use the Node.js File System (fs) module to read from and write to a separate JSON file to store the user data securely on the server-side. The JSON file can be created, updated, and accessed using functions provided by the fs module, such as `fs.readFile`, `fs.writeFile`, `fs.readFileSync`, `fs.writeFileSync`, etc.
-
-// Remember to handle file read/write operations asynchronously and handle errors appropriately. Additionally, ensure proper file paths and file permissions are set when accessing the JSON file.
-
 class UserData {
   constructor(username, password, email) {
     this.username = username;
@@ -66,11 +55,54 @@ function addUser(userData) {
   console.log("User added successfully.");
 }
 
-const newUser = new UserData("Alice", "password789", "alice@example.com");
+// Frontend functionality
+
+function formularAbsenden(event) {
+  event.preventDefault(); // Verhindert das Standardverhalten des Absendens
+
+  // Den Inhalt der Eingabefelder Email und Password über die IDs abrufen
+  let eingabeEmail = document.getElementById("InputEmail").value;
+  let eingabePassword = document.getElementById("InputPassword").value;
+
+  // Eingabevalidierung
+  if (!eingabeEmail || eingabeEmail.trim() === "") {
+    alert("Bitte geben Sie eine Email-Adresse ein.");
+    return;
+  }
+
+  if (!validateEmail(eingabeEmail)) {
+    alert("Bitte geben Sie eine gültige Email-Adresse ein.");
+    return;
+  }
+
+  if (
+    !eingabePassword ||
+    eingabePassword.trim() === "" ||
+    eingabePassword.length < 8
+  ) {
+    alert(
+      "Bitte geben Sie ein Passwort ein. Das Passwort muss mindestens 8 Zeichen lang sein."
+    );
+    return;
+  }
+}
+// Add the new user to the system
 addUser(newUser);
 
-const newUser2 = new UserData("Bob", "password123", "bob@example.com");
-addUser(newUser2);
+// Reset the form
+document.getElementById("welcomeFormular").reset();
 
-const newUser3 = new UserData("Charlie", "password456", "bob@example.com");
-addUser(newUser3);
+// Display a success message or perform any other desired actions
+console.log("New user created:", newUser);
+
+// Das Formular-Element über die ID abrufen
+let form = document.getElementById("welcomeFormular");
+
+// Die Funktion formularAbsenden aufrufen, wenn das Formular abgeschickt wird
+form.addEventListener("submit", formularAbsenden);
+
+// Funktion zur Überprüfung der Email-Adresse mit einem einfachen regulären Ausdruck
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
