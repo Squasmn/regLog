@@ -66,6 +66,7 @@ section {
 }
 body {
   margin: 0;
+  padding: 0;
   font-family: Nunito, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol", "Noto Color Emoji";
@@ -75,19 +76,14 @@ body {
   color: #858796;
   text-align: left;
   background-color: #fff;
-}
-[tabindex="-1"]:focus:not(:focus-visible) {
-  outline: 0 !important;
-}
-
-body {
-  margin: 0;
-  padding: 0;
   overflow: hidden;
   background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><defs><linearGradient id="a" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="red"><animate attributeName="stop-color" values="red;purple;blue;green;yellow;orange;red;" dur="20s" repeatCount="indefinite"></animate></stop><stop offset=".5" stop-color="purple"><animate attributeName="stop-color" values="purple;blue;green;yellow;orange;red;purple;" dur="20s" repeatCount="indefinite"></animate></stop><stop offset="1" stop-color="blue"><animate attributeName="stop-color" values="blue;green;yellow;orange;red;purple;blue;" dur="20s" repeatCount="indefinite"></animate></stop><animateTransform attributeName="gradientTransform" type="rotate" from="0 .5 .5" to="360 .5 .5" dur="20s" repeatCount="indefinite"></animateTransform></linearGradient><linearGradient id="b" gradientUnits="objectBoundingBox" x1="0" y1="1" x2="1" y2="1"><stop offset="0" stop-color="red"><animate attributeName="stop-color" values="red;purple;blue;green;yellow;orange;red;" dur="20s" repeatCount="indefinite"></animate></stop><stop offset="1" stop-color="purple" stop-opacity="0"><animate attributeName="stop-color" values="purple;blue;green;yellow;orange;red;purple;" dur="20s" repeatCount="indefinite"></animate></stop><animateTransform attributeName="gradientTransform" type="rotate" values="360 .5 .5;0 .5 .5" class="ignore" dur="10s" repeatCount="indefinite"></animateTransform></linearGradient></defs><rect fill="url(%23a)" width="100%" height="100%"></rect><rect fill="url(%23b)" width="100%" height="100%"></rect></svg>');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+[tabindex="-1"]:focus:not(:focus-visible) {
+  outline: 0 !important;
 }
 
 hr {
