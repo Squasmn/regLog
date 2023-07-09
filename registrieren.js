@@ -1,15 +1,6 @@
 // ESM syntax is supported.
 export {};
 
-import * as fs from 'node:fs';
-/*
-let form = document.getElementById("welcomeFormular");
-form.addEventListener("submit", formularAbsenden);
-
-function formularAbsenden(event) {
-  event.preventDefault(); 
-console.log("Hi Team")
-}*/
 
 class UserData {
   constructor(firstname, lastName, email,password ) {
@@ -20,12 +11,18 @@ class UserData {
   }
 }
 
-let form = document.getElementById("registrationFormular");
-form.addEventListener("submit", formularCreateAccount);
+
+  
+  console.log("Registrieren")
+  let formRegist = document.getElementById("registrationFormular");
+  formRegist.addEventListener("submit", createAccount);  
 
 
-export function formularCreateAccount(event) {
-  console.log("hii")
+
+
+
+
+  function createAccount(event) {
   event.preventDefault(); // Verhindert das Standardverhalten des Absendens
 
   let firstName = document.getElementById("FirstName").value;
@@ -74,27 +71,58 @@ if (lastName == "" || regName.test(lastName)) {
     return;
   }
 
-console.log("Eingegebener Vorname: " + firstName);
+/*console.log("Eingegebener Vorname: " + firstName);
 console.log("Eingegebener Nachname: " + lastName);
 console.log("Eingegebene Email: " + eingabeEmail);
 console.log("Eingegebenes Passwort: " + eingabePassword);
-
+*/
 // Create a new instance of UserData with the entered data
 const newUser = new UserData(firstName,lastName,eingabeEmail,eingabePassword);
+console.log("New user created:", newUser);
+
+userSaving(newUser)
+event.target.reset();
 
 // Add the new user to the system
 //addUser(newUser);
 
 // Reset the form
-//event.target.reset();
+}
 
-// Display a success message or perform any other desired actions
-console.log("New user created:", newUser);
 
+function userSaving(UserData){
+  if (localStorage.getItem("Users")==null) {
+    localStorage.setItem("Users","[]")
+  }
+  const storedJson = localStorage.getItem("Users");
+  let existingData=JSON.parse(storedJson);
+
+  existingData.push(UserData);
+  
+  let json = JSON.stringify(existingData);
+  localStorage.setItem("Users", json);
+
+  getUsers()
 }
 
 
 
+function getUsers(){ 
+const storedJson = localStorage.getItem("Users");
+  if (storedJson) {
+    // Umwandeln des JSON-Strings in ein Array von Objekten
+    let storedArray = JSON.parse(storedJson);
+  
+    // Jetzt können Sie das Array verwenden, z.B.:
+    console.log(storedArray);
+  } else {
+    alert("There is No User")
+    // Der Wert ist nicht im LocalStorage vorhanden oder wurde gelöscht
+  }
+  //console.log(existingData)
+}
+
+/*
 function addUser(UserData) {
   // Check if the file exists before reading
   if (!fs.existsSync("userdata.json")) {
@@ -135,7 +163,7 @@ function addUser(UserData) {
 
   console.log("User added successfully.");
 }
-
+*/
 
 /*
   // Create a new instance of UserData with the entered data
