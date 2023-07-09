@@ -1,54 +1,196 @@
 // ESM syntax is supported.
 export {};
-import { formularAbsenden } from "./functions.js";
-import { formularCreateAccount } from "./functions.js";
+import fs from "fs";
 
-// Group Project registration and login functionality
-
-// Erstellen einer login und registrier Webpage
-
-// Arbeitsteilung:
-
-// Team Member 1: Backend Development
-
-// Set up the project structure: Create the directory structure for the project and initialize a new Node.js project using npm. DONE
-// Design the data structure: Define the structure of the user data, including username, password, and additional profile information, using JavaScript objects and arrays.
-// Implement user registration functionality:
-// Create server-side routes to handle user registration requests.
-// Validate the input for requirements like username uniqueness, password complexity, etc.
-// Store the user details securely in a JSON file
-// Create server-side routes to handle user login requests.
-// Verify the entered credentials against the stored user data.
-// Generate a session token or identifier and send it as a response upon successful login.
-// Implement user profile management functionality:
-// Create server-side routes to handle profile retrieval and update requests.
-// Retrieve and update the user's profile information in the JSON file or the database.
-// Handle error cases:
-// Implement proper error handling for scenarios like invalid inputs, duplicate usernames during registration, incorrect login credentials, etc.
-// Test the backend functionality:
-// Write unit tests to verify the registration, login, and profile management functionalities.
-// Test different scenarios and edge cases to ensure the proper functioning of the backend code.
-
-// Design the data structure: Define the structure of the user data, including username, password, and additional profile information, using JavaScript objects and arrays.
-
-class userData {
+class UserData {
   constructor(username, password, email) {
     this.username = username;
     this.password = password;
     this.email = email;
   }
-
-  // Implement user registration functionality:
-
-  // Create server-side routes to handle user registration requests.
-
-  // Validate the input for requirements like username uniqueness, password complexity, etc.
-
-  // Store the user details securely in a JSON file
 }
 
-let Halid = new userData("Halid", "1234", "Student");
+function addUser(userData) {
+  // Check if the file exists before reading
+  if (!fs.existsSync("userdata.json")) {
+    console.error("userdata.json does not exist.");
+    return;
+  }
 
-console.log(Halid.username);
+  // Read the existing data from the JSON file
+  let existingData = [];
+  let jsonData;
+  try {
+    jsonData = fs.readFileSync("userdata.json", "utf-8");
+    existingData = JSON.parse(jsonData);
+  } catch (error) {
+    console.error("Error reading userdata.json:", error);
+    return;
+  }
 
-document.getElementById("InputEmail").placeholder = "Schreib dein Email";
+  // Check for duplicate registrations
+  const isDuplicate = existingData.some(
+    (user) =>
+      user.username === userData.username || user.email === userData.email
+  );
+
+  if (isDuplicate) {
+    console.error("User with the same username or email already exists.");
+    return;
+  }
+
+  // Add the new user data to the existing array
+  existingData.push(userData);
+
+  // Convert the updated data to JSON string
+  const updatedData = JSON.stringify(existingData, null, 2);
+
+  // Write the updated data back to the JSON file
+  fs.writeFileSync("userdata.json", updatedData, "utf-8");
+
+  console.log("User added successfully.");
+}
+
+function formularAbsenden(event) {
+  event.preventDefault(); // Prevents the default form submission behavior
+
+  // Get the values of email and password input fields
+  let eingabeEmail = document.getElementById("InputEmail").value;
+  let eingabePassword = document.getElementById("InputPassword").value;
+
+  // Input validation
+  if (!eingabeEmail || eingabeEmail.trim() === "") {
+    alert("Bitte geben Sie eine Email-Adresse ein.");
+    return;
+  }
+
+  if (!validateEmail(eingabeEmail)) {
+    alert("Bitte geben Sie eine gültige Email-Adresse ein.");
+    return;
+  }
+
+  if (
+    !eingabePassword ||
+    eingabePassword.trim() === "" ||
+    eingabePassword.length < 8
+  ) {
+    alert(
+      "Bitte geben Sie ein Passwort ein. Das Passwort muss mindestens 8 Zeichen lang sein."
+    );
+    return;
+  }
+
+  // Create a new instance of UserData with the entered data
+  const newUser = new UserData("", eingabePassword, eingabeEmail);
+
+  // Add the new user to the system
+  addUser(newUser);
+
+  // Reset the form
+  event.target.reset();
+
+  // Display a success message or perform any other desired actions
+  console.log("New user created:", newUser);
+}
+
+// Das Formular-Element über die ID abrufen
+let formWelcome = document.getElementById("welcomeFormular");
+
+// Die Funktion formularAbsenden aufrufen, wenn das Formular abgeschickt wird
+formWelcome.addEventListener("submit", formularAbsenden);
+
+// Funktion zur Überprüfung der Email-Adresse mit einem einfachen regulären Ausdruck
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+// -------------------Formular Anmelde Validierung------------------
+export function formularAnmelden(event) {
+  event.preventDefault(); // Verhindert das Standardverhalten des Absendens
+
+  // Den Inhalt der Eingabefelder Email und Password über die IDs abrufen
+  let eingabeEmail = document.getElementById("InputEmail").value;
+  let eingabePassword = document.getElementById("InputPassword").value;
+
+  // Eingabevalidierung
+  if (!eingabeEmail || eingabeEmail.trim() === "") {
+    alert("Bitte geben Sie eine Email-Adresse ein.");
+    return;
+  }
+
+  if (!validateEmail(eingabeEmail)) {
+    alert("Bitte geben Sie eine gültige Email-Adresse ein.");
+    return;
+  }
+
+  if (
+    !eingabePassword ||
+    eingabePassword.trim() === "" ||
+    eingabePassword.length < 8
+  ) {
+    alert(
+      "Bitte geben Sie ein Passwort ein. Das Passwort muss mindestens 8 Zeichen lang sein."
+    );
+    return;
+  }
+
+  // Hier kannst du den eingegebenen Inhalt weiterverarbeiten, z. B. an das Backend senden
+  console.log("Eingegebene Email: " + eingabeEmail);
+  console.log("Eingegebenes Passwort: " + eingabePassword);
+}
+
+// Das Formular-Element über die ID abrufen
+let formAnmelden = document.getElementById("formularAnmelden");
+
+// Die Funktion formularAnmelden aufrufen, wenn das Formular abgeschickt wird
+formAnmelden.addEventListener("submit", formularAnmelden);
+
+// Funktion zur Überprüfung der Email-Adresse mit einem einfachen regulären Ausdruck
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+//---------------------------------Formular Create an Account!-----------------
+
+export function formularCreateAccount(event) {
+  event.preventDefault(); // Verhindert das Standardverhalten des Absendens
+
+  let firstName = document.getElementById("inputFirstname").value;
+  let lastName = document.getElementById("inputLastname").value;
+  let eingabePassword = document.getElementById("inputPassword").value;
+  let repeatEingabePassword = document.getElementById(
+    "repeatInputpassword"
+  ).value;
+
+  let eingabeEmail = document.getElementById("inputEmail").value;
+
+  // Eingabevalidierung
+  if (!eingabeEmail || eingabeEmail.trim() === "") {
+    alert("Bitte geben Sie eine Email-Adresse ein.");
+    return;
+  }
+
+  if (!validateEmail(eingabeEmail)) {
+    alert("Bitte geben Sie eine gültige Email-Adresse ein.");
+    return;
+  }
+
+  if (
+    !eingabePassword ||
+    eingabePassword.trim() === "" ||
+    eingabePassword.length < 8 ||
+    eingabePassword != repeatEingabePassword
+  ) {
+    alert(
+      "Bitte geben Sie ein Passwort ein. Das Passwort muss mindestens 8 Zeichen lang sein."
+    );
+    return;
+  }
+}
+// Hier kannst du den eingegebenen Inhalt weiterverarbeiten, z. B. an das Backend senden
+console.log("Eingegebener Vorname: " + firstName);
+console.log("Eingegebener Nachname: " + lastName);
+console.log("Eingegebene Email: " + eingabeEmail);
+console.log("Eingegebenes Passwort: " + eingabePassword);
