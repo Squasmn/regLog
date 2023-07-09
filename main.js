@@ -52,17 +52,36 @@ console.log(Halid.username);
 document.getElementById("InputEmail").placeholder="Schreib dein Email"
 */
 
+class userDatam{
+  constructor( email,password) {
+    //this.username = username;
+    this.email = email;
+    this.password = password;
+  }
+}
+
 function formularAbsenden(event) {
   event.preventDefault(); // Verhindert das Standardverhalten des Absendens
 
   // Den Inhalt der Eingabefelder Email und Password über die IDs abrufen
   let eingabeEmail = document.getElementById("InputEmail").value;
   let eingabePassword = document.getElementById("InputPassword").value;
+  
+  function trying(){
+    let person=new userDatam(eingabeEmail,eingabePassword)
+    console.log(person)
+  }
+  
 
   // Hier kannst du den eingegebenen Inhalt weiterverarbeiten, z. B. an das Backend senden
+  trying()
   console.log("Eingegebener Email: " + eingabeEmail);
   console.log("Eingegebener Passwort: " + eingabePassword);
 }
+
+
+//"halid",1234,"gmail"
+
 
 // Das Formular-Element über die ID abrufen
 let form = document.getElementById("welcomeFormular");
