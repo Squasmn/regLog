@@ -1,7 +1,24 @@
 // ESM syntax is supported.
 export {};
-import fs from "fs";
 
+//import fs from "fs";
+/*
+let form = document.getElementById("welcomeFormular");
+form.addEventListener("submit", formularAbsenden);
+
+function formularAbsenden(event) {
+  event.preventDefault(); 
+console.log("Hi Team")
+}
+
+let form = document.getElementById("registrationFormular");
+form.addEventListener("submit", formularAbsenden);
+
+function formularAbsenden(event) {
+  event.preventDefault(); 
+console.log("Hi Team")
+}*/
+/*
 class UserData {
   constructor(username, password, email) {
     this.username = username;
@@ -51,12 +68,15 @@ function addUser(userData) {
   console.log("User added successfully.");
 }
 
+
+/*
 function formularAbsenden(event) {
   event.preventDefault(); // Prevents the default form submission behavior
 
   // Get the values of email and password input fields
   let eingabeEmail = document.getElementById("InputEmail").value;
   let eingabePassword = document.getElementById("InputPassword").value;
+  console.log(eingabeEmail+ " " +eingabePassword) 
 
   // Input validation
   if (!eingabeEmail || eingabeEmail.trim() === "") {
@@ -105,6 +125,7 @@ function validateEmail(email) {
   return emailRegex.test(email);
 }
 
+
 // -------------------Formular Anmelde Validierung------------------
 export function formularAnmelden(event) {
   event.preventDefault(); // Verhindert das Standardverhalten des Absendens
@@ -151,20 +172,19 @@ function validateEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
-
+*/
 //---------------------------------Formular Create an Account!-----------------
 
 export function formularCreateAccount(event) {
   event.preventDefault(); // Verhindert das Standardverhalten des Absendens
 
-  let firstName = document.getElementById("inputFirstname").value;
-  let lastName = document.getElementById("inputLastname").value;
-  let eingabePassword = document.getElementById("inputPassword").value;
-  let repeatEingabePassword = document.getElementById(
-    "repeatInputpassword"
-  ).value;
+  let firstName = document.getElementById("Firstname").value;
+  let lastName = document.getElementById("Lastname").value;
+  let eingabeEmail = document.getElementById("NewEmail").value;
+  let eingabePassword = document.getElementById("NewPassword").value;
+  let eingabePassword2 = document.getElementById("NewPassword2").value;
 
-  let eingabeEmail = document.getElementById("inputEmail").value;
+
 
   // Eingabevalidierung
   if (!eingabeEmail || eingabeEmail.trim() === "") {
@@ -181,7 +201,7 @@ export function formularCreateAccount(event) {
     !eingabePassword ||
     eingabePassword.trim() === "" ||
     eingabePassword.length < 8 ||
-    eingabePassword != repeatEingabePassword
+    eingabePassword != eingabePassword2
   ) {
     alert(
       "Bitte geben Sie ein Passwort ein. Das Passwort muss mindestens 8 Zeichen lang sein."

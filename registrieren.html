@@ -37,20 +37,20 @@
                 <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                 </div>
-                <form class="user">
+                <form id="registrationFormular" class="user">
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                       <input
                         type="text"
                         class="form-control form-control-user"
-                        id="exampleFirstName"
+                        id="FirstName"
                         placeholder="First Name" />
                     </div>
                     <div class="col-sm-6">
                       <input
                         type="text"
                         class="form-control form-control-user"
-                        id="exampleLastName"
+                        id="LastName"
                         placeholder="Last Name" />
                     </div>
                   </div>
@@ -58,7 +58,7 @@
                     <input
                       type="email"
                       class="form-control form-control-user"
-                      id="exampleInputEmail"
+                      id="NewEmail"
                       placeholder="Email Address" />
                   </div>
                   <div class="form-group row">
@@ -66,22 +66,23 @@
                       <input
                         type="password"
                         class="form-control form-control-user"
-                        id="exampleInputPassword"
+                        id="NewPassword"
                         placeholder="Password" />
                     </div>
                     <div class="col-sm-6">
                       <input
                         type="password"
                         class="form-control form-control-user"
-                        id="exampleRepeatPassword"
+                        id="NewPassword2"
                         placeholder="Repeat Password" />
                     </div>
                   </div>
-                  <a
+                  <button
+                  type="submit"
                     href="/index.html"
                     class="btn btn-primary btn-user btn-block">
                     Register Account
-                  </a>
+                  </button>
                   <hr />
                   <a
                     href="/index.html"
@@ -113,15 +114,7 @@
       </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-    <script src="main.js"></script>
+   
+    <script type="module" src="main.js"></script>
   </body>
 </html>
