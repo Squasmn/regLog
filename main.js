@@ -1,5 +1,7 @@
 // ESM syntax is supported.
 export {};
+import { formularAbsenden } from "./functions.js";
+import { formularCreateAccount } from "./functions.js";
 
 // Group Project registration and login functionality
 
@@ -29,7 +31,7 @@ export {};
 
 // Design the data structure: Define the structure of the user data, including username, password, and additional profile information, using JavaScript objects and arrays.
 
- class userData {
+class userData {
   constructor(username, password, email) {
     this.username = username;
     this.password = password;
@@ -49,5 +51,4 @@ let Halid = new userData("Halid", "1234", "Student");
 
 console.log(Halid.username);
 
-document.getElementById("InputEmail").placeholder="Schreib dein Email"
-
+document.getElementById("InputEmail").placeholder = "Schreib dein Email";
