@@ -105,7 +105,6 @@ function validateEmail(email) {
   return emailRegex.test(email);
 }
 
-
 // -------------------Formular Anmelde Validierung------------------
 export function formularAnmelden(event) {
   event.preventDefault(); // Verhindert das Standardverhalten des Absendens
@@ -189,9 +188,9 @@ export function formularCreateAccount(event) {
     );
     return;
   }
-
-  // Hier kannst du den eingegebenen Inhalt weiterverarbeiten, z. B. an das Backend senden
-  console.log("Eingegebener Vorname: " + firstName);
-  console.log("Eingegebener Nachname: " + lastName);
-  console.log("Eingegebene Email: " + eingabeEmail);
-  console.log("Eingegebenes Passwort: " + eingabe
+}
+// Hier kannst du den eingegebenen Inhalt weiterverarbeiten, z. B. an das Backend senden
+console.log("Eingegebener Vorname: " + firstName);
+console.log("Eingegebener Nachname: " + lastName);
+console.log("Eingegebene Email: " + eingabeEmail);
+console.log("Eingegebenes Passwort: " + eingabePassword);
