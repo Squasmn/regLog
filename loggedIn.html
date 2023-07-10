@@ -12,13 +12,17 @@
     <link href="./style.css" rel="stylesheet" />
   </head>
   <body>
-    <div class="container">
-      <h1>Welcome to our Project</h1>
-
+    <div style="width: 50%;" class="container">
+      <h1  class="h1" style="text-align: center; color: #ffffff;">Welcome to our Project</h1>
+      <br>
       <!-- Notification -->
       <div class="alert alert-success" role="alert">
-        You are successfully logged in <span id="username"></span>.
+        You are successfully logged in <span id="username"></span>
       </div>
+      <br>
+      <button id="totable" class="btn btn-primary btn-user btn-block" >Show Registered Users</button>
+      
+      <br><button id="toindex"  class="btn btn-primary btn-user btn-block" >Sign Out</button>
     </div>
 
     <!-- Bootstrap JS (optional, only needed for certain components) -->
@@ -27,8 +31,25 @@
     <!-- Custom script -->
     <script>
       // Replace 'username' with the actual logged-in user's name
-      let username = "John Doe";
-      document.getElementById("username").innerText = username;
+      function getUsers(){ 
+const storedJson = localStorage.getItem("Users");
+  if (storedJson) {
+    // Umwandeln des JSON-Strings in ein Array von Objekten
+    let storedArray = JSON.parse(storedJson);
+  
+    // Jetzt können Sie das Array verwenden, z.B.:
+    
+    document.getElementById("username").innerText = localStorage.getItem("loggedUser");
+   
+  } else {
+    alert("There is No User")
+    // Der Wert ist nicht im LocalStorage vorhanden oder wurde gelöscht
+  }
+}
+    getUsers()
+    document.getElementById("totable").addEventListener("click",(event)=>{location.href="/userData.html"})
+    document.getElementById("toindex").addEventListener("click",(event)=>{location.href="/index.html"})
+    
     </script>
   </body>
 </html>

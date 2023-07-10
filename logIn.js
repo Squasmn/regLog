@@ -37,19 +37,22 @@ let formLogIn = document.getElementById("welcomeFormular");
       );
       return;
     }
-    getUsers()
-  }
-
-
-  function getUsers(){ 
-    const storedJson = localStorage.getItem("Users");
-      if (storedJson) {
-        // Umwandeln des JSON-Strings in ein Array von Objekten
-        let storedArray = JSON.parse(storedJson);
-      
-        // Jetzt können Sie das Array verwenden, z.B.:
-        console.log(storedArray);
-      } else {
-        alert("There is No User")
-      }
+    if (localStorage.getItem("Users")==null ||localStorage.getItem("Users")=="[]" ) {
+      localStorage.setItem("Users","[]")
+      alert("There is No User")
     }
+    const storedJson = localStorage.getItem("Users");
+    let storedArray = JSON.parse(storedJson);
+   // console.log(eingabeEmail + " "+ eingabePassword)
+   for (var i = 0; i < storedArray.length; i++) {
+     var obj = storedArray[i];
+     
+      if (obj.email==eingabeEmail && obj.password== eingabePassword) {
+        localStorage.setItem('loggedUser', obj.firstname +" "+ obj.lastName);
+        location.href="/loggedIn.html"
+        return;
+      }
+    }alert("Sie haben kein Konto")
+    return
+   }
+
