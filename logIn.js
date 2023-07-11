@@ -1,4 +1,5 @@
-let formLogIn = document.getElementById("welcomeFormular");
+
+ let formLogIn = document.getElementById("welcomeFormular");
   formLogIn.addEventListener("submit", logIn); 
 
   function logIn(event) {
@@ -43,11 +44,12 @@ let formLogIn = document.getElementById("welcomeFormular");
     }
     const storedJson = localStorage.getItem("Users");
     let storedArray = JSON.parse(storedJson);
-   // console.log(eingabeEmail + " "+ eingabePassword)
-   for (var i = 0; i < storedArray.length; i++) {
+
+    for (var i = 0; i < storedArray.length; i++) {
      var obj = storedArray[i];
      
       if (obj.email==eingabeEmail && obj.password== eingabePassword) {
+        
         localStorage.setItem('loggedUser', obj.firstname +" "+ obj.lastName);
         location.href="/loggedIn.html"
         return;

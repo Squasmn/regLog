@@ -10,28 +10,23 @@ class UserData {
     this.password = password;
   }
 }
-
-
-  
-  console.log("Registrieren")
+  //Hier wird es deklariert, dass beim 'submit' des Formes createAccount Funktion aufgerufen wird   
   let formRegist = document.getElementById("registrationFormular");
   formRegist.addEventListener("submit", createAccount);  
 
-
-
-
-
-
+//Funktion zum neuen User erstellen
   function createAccount(event) {
   event.preventDefault(); // Verhindert das Standardverhalten des Absendens
 
+  //Html Objekte werden hier mit variablen verbunden und ihre Values werden hier gesammelt
   let firstName = document.getElementById("FirstName").value;
   let lastName = document.getElementById("LastName").value;
   let eingabeEmail = document.getElementById("NewEmail").value;
   let eingabePassword = document.getElementById("NewPassword").value;
   let eingabePassword2 = document.getElementById("NewPassword2").value;
 
-// Funktion zur Überprüfung der Email-Adresse mit einem einfachen regulären Ausdruck
+// Funktion zur Überprüfung der Email-Adresse und Passwort 
+
 function validateEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
@@ -48,7 +43,6 @@ if (lastName == "" || regName.test(lastName)) {
   return false;
 }
 
-  // Eingabevalidierung
   if (!eingabeEmail || eingabeEmail.trim() === "") {
     alert("Bitte geben Sie eine Email-Adresse ein.");
     return;
@@ -69,10 +63,11 @@ if (lastName == "" || regName.test(lastName)) {
       "Bitte geben Sie ein Passwort ein. Das Passwort muss mindestens 8 Zeichen lang sein."
     );
     return;
-  }
+  }//Wenn es kein Users Array im LocalStorage vorhanden ist wird ein leeres Array erstellt und dort gespeichert
   if (localStorage.getItem("Users")==null) {
     localStorage.setItem("Users","[]")
   }
+  //Hier wird es geprüft ob User schon mit seinem Email registriert ist
   const storedJson = localStorage.getItem("Users");
   let storedArray=JSON.parse(storedJson);
   for (var i = 0; i < storedArray.length; i++) {
@@ -83,24 +78,18 @@ if (lastName == "" || regName.test(lastName)) {
     }
   }
 
-console.log("went on")
-/*console.log("Eingegebener Vorname: " + firstName);
-console.log("Eingegebener Nachname: " + lastName);
-console.log("Eingegebene Email: " + eingabeEmail);
-console.log("Eingegebenes Passwort: " + eingabePassword);
-*/
 // Create a new instance of UserData with the entered data
 const newUser = new UserData(firstName,lastName,eingabeEmail,eingabePassword);
-console.log("New user created:", newUser);
 
-// Add the new user to the system
+// Add the new user to the system via userSaving Function
 userSaving(newUser)
+//formular wird wieder geleere
 event.target.reset();
 
+//User wird als eingeloggter User gespeichert
 localStorage.setItem('loggedUser', firstName +" "+ lastName);
 
 location.href="/loggedIn.html"
-
 
 }
 
